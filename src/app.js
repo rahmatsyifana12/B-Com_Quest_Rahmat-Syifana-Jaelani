@@ -27,7 +27,7 @@ app.listen(port, async () => {
         await pool.query(
             `CREATE TABLE IF NOT EXISTS contacts (
                 id SERIAL NOT NULL PRIMARY KEY,
-                name VARHCAR(255) NOT NULL,
+                name VARCHAR(255) NOT NULL,
                 email VARCHAR(255) NOT NULL,
                 phone_number VARCHAR(255) NOT NULL
             );`
