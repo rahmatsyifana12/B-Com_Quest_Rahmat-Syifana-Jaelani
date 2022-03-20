@@ -33,10 +33,7 @@ app.listen(port, async () => {
             );`
         );
     } catch (error) {
-        res.status(500).json({
-            status: 'fail',
-            message: 'Unexpected server error'
-        });
+        console.log(error);
     }
     console.log(`Server is running at http://localhost:${port}`);
 });
