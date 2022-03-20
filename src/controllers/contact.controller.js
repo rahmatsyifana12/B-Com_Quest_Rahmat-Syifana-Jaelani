@@ -43,4 +43,33 @@ async function addContact(req, res) {
     }
 }
 
-module.exports = { addContact };
+async function deleteContact(req, res) {
+    const contactId = req.params.contactId;
+    try {
+        const contact = await pool.query('SELECT * FROM contacts WHERE id = $1;', [contactId]);
+
+        if (!contact.rows.length) {
+            return res.status(404).json({
+                status: 'fail',
+                message: 'Account not found'
+            });
+        }
+
+        await pool.query(
+            'DELETE FROM contacts WHERE id = $1;',
+            [contactId]
+        );
+
+        return res.status(200).json({
+            status: 'success',
+            message: 'Successfully deleted contact'
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Unexpected server error'
+        });
+    }
+}
+
+module.exports = { addContact, deleteContact };
