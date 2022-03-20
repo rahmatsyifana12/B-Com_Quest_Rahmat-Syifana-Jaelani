@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const { user } = require('pg/lib/defaults');
 const pool = require('../db');
 
 const { newUserSchema } = require('../validations/user.validation');
@@ -17,7 +16,7 @@ async function addUser(req, res) {
     const { email, password } = req.body;
 
     try {
-        const users = await pool.query('SELECT * FROM users WHERE email=$1;', [email]);
+        const users = await pool.query('SELECT * FROM users WHERE email = $1;', [email]);
 
         if (users.rows.length) {
             return res.status(400).json({
