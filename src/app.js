@@ -1,7 +1,6 @@
 const express = require('express');
 const routes = require('./routes');
 const pool = require('./db');
-const res = require('express/lib/response');
 
 require('dotenv').config();
 
