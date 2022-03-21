@@ -59,4 +59,60 @@ async function addUser(req, res) {
 }
 
 
-module.exports = { addUser };
+async function loginUser(req, res) {
+    const { email, password } = req.body;
+    let user;
+
+    try {
+        user = await pool.query(
+            'SELECT * FROM users WHERE email=$1;', [email]
+        );
+
+        if (!user.rows.length) {
+            return res.status(400).json({
+                status: 'fail',
+                message: 'Account doesn\'t exist'
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Unexpected server error'
+        });
+    }
+
+    try {
+        if (!bcrypt.compareSync(password, user.rows[0].password)) {
+            return res.status(400).json({
+                status: 'fail',
+                message: 'Object or value is invalid'
+            });
+        }
+
+        const user = {
+            userId: user.rows[0].id,
+            email: user.rows[0].email,
+            role: user.role
+        };
+
+        const accessToken = jwt.sign(
+            user,
+            process.env.ACCESS_TOKEN_SECRET
+        );
+
+        return res.status(200).json({
+            status: 'success',
+            message: 'Successfully login',
+            data: {
+                accessToken
+            }
+        });
+    } catch (err) {
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Unexpected server error'
+        });
+    }
+}
+
+module.exports = { addUser, loginUser };
