@@ -2,21 +2,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const pool = require('../db');
 
-const { newUserSchema, userRole } = require('../validations/user.validation');
+const { userRole } = require('../validations/user.validation');
 
 async function addUser(req, res) {
-    const valResult = newUserSchema.validate({
-        ...req.body,
-        role: userRole.MEMBER
-    });
-
-    if (valResult.error) {
-        return res.status(400).json({
-            status: 'fail',
-            message: 'Object or value is invalid'
-        });
-    }
-
     const { email, password } = req.body;
 
     try {

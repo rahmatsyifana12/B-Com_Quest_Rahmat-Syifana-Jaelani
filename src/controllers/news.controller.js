@@ -1,17 +1,7 @@
 const pool = require('../db');
 const jwt = require('jsonwebtoken');
-const { newNewsSchema } = require('../validations/news.validation');
 
 async function addNews(req, res) {
-    const valResult = newNewsSchema.validate(req.body);
-
-    if (valResult.error) {
-        return res.status(400).json({
-            status: 'fail',
-            message: 'Object or value is invalid'
-        });
-    }
-
     const { title, content } = req.body;
 
     const token = req.headers['authorization'].split(' ')[1];
@@ -51,15 +41,6 @@ async function updateNews(req, res) {
         return res.status(500).json({
             status: 'fail',
             message: 'Unexpected server error'
-        });
-    }
-
-    const valResult = updateNews.validate(req.body);
-
-    if (valResult.error) {
-        return res.status(400).json({
-            status: 'fail',
-            message: 'Object or value is invalid'
         });
     }
 
