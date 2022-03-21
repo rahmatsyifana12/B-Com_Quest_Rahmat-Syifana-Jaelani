@@ -102,7 +102,7 @@ async function getAllArticles(req, res) {
             status: 'success',
             message: 'Found all articles',
             data: {
-                products: articles.rows
+                articles: articles.rows
             }
         });
     } catch (error) {
@@ -131,8 +131,8 @@ async function getArticle(req, res) {
             status: 'success',
             message: 'Article found',
             data: {
-                article,
-                comments
+                article: article.rows[0],
+                comments: comments.rows
             }
         });
     } catch (error) {
