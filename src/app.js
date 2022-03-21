@@ -2,6 +2,7 @@ const express = require('express');
 const routes = require('./routes');
 const pool = require('./db');
 const { memberSeeder, adminSeeder } = require('./seeder/seedUsers');
+const articleSeeder = require('./seeder/seedArticles');
 
 require('dotenv').config();
 
@@ -48,6 +49,7 @@ app.listen(port, async () => {
 
         // memberSeeder();
         // adminSeeder();
+        articleSeeder();
 
     } catch (error) {
         console.log(error);

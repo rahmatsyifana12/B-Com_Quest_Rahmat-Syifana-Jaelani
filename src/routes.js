@@ -6,7 +6,7 @@ const { authenticate } = require('./middlewares/authenticate.middleware');
 const { permission } = require('./middlewares/permission.middleware');
 const validate = require('./middlewares/validate.middleware');
 const { newCommentSchema } = require('./validations/comment.validation');
-const { newArticleSchema, updateArticleSchema } = require('./validations/news.validation');
+const { newArticleSchema, updateArticleSchema } = require('./validations/article.validation');
 const { newUserSchema } = require('./validations/user.validation');
 
 const router = Router();
