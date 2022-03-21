@@ -1,5 +1,10 @@
 const joi = require('joi');
 
+const userRole = {
+    MEMBER: 0,
+    ADMIN: 1
+};
+
 const newUserSchema = joi.object({
     email: joi.string()
         .max(64)
@@ -16,7 +21,10 @@ const newUserSchema = joi.object({
         .rule({ message: '{#label} requires at least a lowercase character' })
 
         .regex(/[A-Z]/)
-        .rule({ message: '{#label} requires at least an uppercase character' })
+        .rule({ message: '{#label} requires at least an uppercase character' }),
+
+    role: joi.number()
+        .required()
 });
 
-module.exports = { newUserSchema };
+module.exports = { newUserSchema, userRole };

@@ -1,10 +1,13 @@
 const bcrypt = require('bcrypt');
 const pool = require('../db');
 
-const { newUserSchema } = require('../validations/user.validation');
+const { newUserSchema, userRole } = require('../validations/user.validation');
 
 async function addUser(req, res) {
-    const valResult = newUserSchema.validate(req.body);
+    const valResult = newUserSchema.validate({
+        ...req.body,
+        role: userRole.MEMBER
+    });
 
     if (valResult.error) {
         return res.status(400).json({
@@ -38,8 +41,8 @@ async function addUser(req, res) {
 
     try {
         await pool.query(
-            'INSERT INTO users (email, password) VALUES ($1, $2);',
-            [email, hashedPassword]
+            'INSERT INTO users (email, password, role) VALUES ($1, $2, $3);',
+            [email, hashedPassword, userRole.MEMBER]
         );
 
         return res.status(201).json({
