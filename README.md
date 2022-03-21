@@ -74,7 +74,6 @@ There are several features that we can do depending on the role we have. There a
 * Update article
 * Delete article
 * Add comments to an article
-* Delete article's comments
 
 ### Entity Relationship Diagram
 This is the database design that's applied for this project.
