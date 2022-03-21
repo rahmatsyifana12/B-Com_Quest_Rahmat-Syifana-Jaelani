@@ -4,15 +4,15 @@ const pool = require('../db');
 async function addComment(req, res) {
     const { content } = req.body;
 
-    const newsId = req.params.newsId;
+    const articleId = req.params.articleId;
 
     const token = req.headers['authorization'].split(' ')[1];
     const userId = jwt.decode(token).userId;
 
     try {
         await pool.query(
-            'INSERT INTO comments (user_id, news_id, content) VALUES ($1, $2, $3);',
-            [userId, newsId, content]
+            'INSERT INTO comments (user_id, article_id, content) VALUES ($1, $2, $3);',
+            [userId, articleId, content]
         );
 
         return res.status(201).json({

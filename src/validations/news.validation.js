@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const newNewsSchema = joi.object({
+const newArticleSchema = joi.object({
     title: joi.string()
         .min(3)
         .max(255)
@@ -12,7 +12,7 @@ const newNewsSchema = joi.object({
         .required()
 });
 
-const updateNewsSchema = joi.object({
+const updateArticleSchema = joi.object({
     title: joi.string()
         .min(3)
         .max(255),
@@ -22,4 +22,4 @@ const updateNewsSchema = joi.object({
         .max(255)
 });
 
-module.exports = { newNewsSchema, updateNewsSchema };
+module.exports = { newArticleSchema, updateArticleSchema };

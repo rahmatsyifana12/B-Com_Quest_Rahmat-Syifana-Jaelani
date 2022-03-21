@@ -1,7 +1,7 @@
 const pool = require('../db');
 const jwt = require('jsonwebtoken');
 
-async function addNews(req, res) {
+async function addArticle(req, res) {
     const { title, content } = req.body;
 
     const token = req.headers['authorization'].split(' ')[1];
@@ -9,13 +9,13 @@ async function addNews(req, res) {
 
     try {
         await pool.query(
-            'INSERT INTO news (user_id, title, content) VALUES ($1, $2, $3);',
+            'INSERT INTO articles (user_id, title, content) VALUES ($1, $2, $3);',
             [userId, title, content]
         );
 
         return res.status(201).json({
             status: 'success',
-            message: 'Successfully created a new news'
+            message: 'Successfully created a new article'
         });
     } catch (error) {
         return res.status(500).json({
@@ -25,13 +25,13 @@ async function addNews(req, res) {
     }
 }
 
-async function updateNews(req, res) {
-    const newsId = req.params.newsId;
+async function updateArticle(req, res) {
+    const articleId = req.params.newsId;
 
     try {
-        const news = await pool.query('SELECT * FROM news WHERE id = $1;', [newsId]);
+        const article = await pool.query('SELECT * FROM news WHERE id = $1;', [articleId]);
 
-        if (!news.rows.length) {
+        if (!article.rows.length) {
             return res.status(404).json({
                 status: 'fail',
                 message: 'News not found'
@@ -48,8 +48,8 @@ async function updateNews(req, res) {
 
     try {
         await pool.query(
-            'UPDATE news SET title = $1, content = $2 WHERE id = $3;',
-            [title, content, newsId]
+            'UPDATE articles SET title = $1, content = $2 WHERE id = $3;',
+            [title, content, articleId]
         );
 
         return res.status(200).json({
@@ -64,27 +64,27 @@ async function updateNews(req, res) {
     }
 }
 
-async function deleteNews(req, res) {
-    const newsId = req.params.newsId;
+async function deleteArticle(req, res) {
+    const articleId = req.params.newsId;
 
     try {
-        const news = await pool.query('SELECT * FROM news WHERE id = $1;', [newsId]);
+        const article = await pool.query('SELECT * FROM articles WHERE id = $1;', [articleId]);
 
-        if (!news.rows.length) {
+        if (!article.rows.length) {
             return res.status(404).json({
                 status: 'fail',
-                message: 'News not found'
+                message: 'Article not found'
             });
         }
 
         await pool.query(
-            'DELETE FROM news WHERE id = $1;',
-            [newsId]
+            'DELETE FROM articles WHERE id = $1;',
+            [articleId]
         );
 
         return res.status(200).json({
             status: 'success',
-            message: 'Successfully deleted news'
+            message: 'Successfully deleted article'
         });
     } catch (error) {
         return res.status(500).json({
@@ -94,4 +94,4 @@ async function deleteNews(req, res) {
     }
 }
 
-module.exports = { addNews, deleteNews, updateNews };
+module.exports = { addArticle, deleteArticle, updateArticle };
