@@ -34,7 +34,7 @@ async function updateArticle(req, res) {
         if (!article.rows.length) {
             return res.status(404).json({
                 status: 'fail',
-                message: 'News not found'
+                message: 'Article not found'
             });
         }
     } catch (error) {
@@ -54,7 +54,7 @@ async function updateArticle(req, res) {
 
         return res.status(200).json({
             status: 'success',
-            message: 'Successfully updated news'
+            message: 'Successfully updated article'
         });
     } catch (error) {
         return res.status(500).json({
