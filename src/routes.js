@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { addComment } = require('./controllers/comment.controller');
-const { addArticle, deleteArticle, updateArticle, getAllArticles } = require('./controllers/articles.controller');
+const { addArticle, deleteArticle, updateArticle, getAllArticles, getArticle } = require('./controllers/articles.controller');
 const { addUser, loginUser } = require('./controllers/user.controller');
 const { authenticate } = require('./middlewares/authenticate.middleware');
 const { permission } = require('./middlewares/permission.middleware');
@@ -12,6 +12,7 @@ const { newUserSchema } = require('./validations/user.validation');
 const router = Router();
 
 router.get('/articles', getAllArticles);
+router.get('/articles/:articleId', getArticle);
 
 router.post('/register',validate(newUserSchema), addUser);
 router.post('/login', loginUser);

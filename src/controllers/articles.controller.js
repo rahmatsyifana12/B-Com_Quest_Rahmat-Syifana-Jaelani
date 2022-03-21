@@ -113,4 +113,36 @@ async function getAllArticles(req, res) {
     }
 }
 
-module.exports = { addArticle, deleteArticle, updateArticle, getAllArticles };
+async function getArticle(req, res) {
+    const articleId = req.params.articleId;
+    try {
+        const article = await pool.query('SELECT * FROM articles WHERE id = $1;', [articleId]);
+
+        if (!article.rows.length) {
+            return res.status(404).json({
+                status: 'fail',
+                message: 'Article not found'
+            });
+        }
+
+        const comments = await pool.query('SELECT * FROM comments WHERE article_id = $1;', [articleId]);
+
+        return res.status(200).json({
+            status: 'success',
+            message: 'Article found',
+            data: {
+                article,
+                comments
+            }
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Unexpected server error'
+        });
+    }
+}
+
+module.exports = {
+    addArticle, deleteArticle, updateArticle, getAllArticles, getArticle
+};
