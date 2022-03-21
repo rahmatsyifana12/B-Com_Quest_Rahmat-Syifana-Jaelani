@@ -42,7 +42,7 @@ app.listen(port, async () => {
                 news_id INT NOT NULL,
                 content VARCHAR(255) NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(id),
-                FOREIGN KEY (news_id) REFERENCES news(id)
+                FOREIGN KEY (news_id) REFERENCES news(id) ON DELETE CASCADE
             );`
         );
 

@@ -9,6 +9,7 @@ const router = Router();
 router.post('/register', addUser);
 router.post('/login', loginUser);
 router.post('/news/add', authenticate, permission, addNews);
+router.post('/news/comment/:newsId', authenticate);
 
 router.put('/news/update/:newsId', authenticate, permission, updateNews);
 
