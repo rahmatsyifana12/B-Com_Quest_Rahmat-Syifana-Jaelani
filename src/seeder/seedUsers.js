@@ -2,8 +2,13 @@ const bcrypt = require('bcrypt');
 const pool = require('../db');
 const { userRole } = require('../validations/user.validation');
 
-async function generateHashedPassword(rawPassword) {
+function generateHashedPassword(rawPassword) {
+    const hashedPassword = bcrypt.hashSync(
+        rawPassword,
+        parseInt(process.env.SALT_ROUNDS)
+    );
 
+    return hashedPassword;
 }
 
 async function memberSeeder() {

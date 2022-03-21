@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const pool = require('./db');
+const { memberSeeder, adminSeeder } = require('./seeder/seedUsers');
 
 require('dotenv').config();
 
@@ -44,6 +45,9 @@ app.listen(port, async () => {
                 FOREIGN KEY (news_id) REFERENCES news(id)
             );`
         );
+
+        memberSeeder();
+        adminSeeder();
     } catch (error) {
         console.log(error);
     }
