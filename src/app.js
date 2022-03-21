@@ -27,6 +27,9 @@ app.listen(port, async () => {
             );`
         );
 
+        memberSeeder();
+        adminSeeder();
+
         await pool.query(
             `CREATE TABLE IF NOT EXISTS articles (
                 id SERIAL NOT NULL PRIMARY KEY,
@@ -36,6 +39,8 @@ app.listen(port, async () => {
                 FOREIGN KEY (user_id) REFERENCES users(id)
             );`
         );
+
+        articleSeeder();
 
         await pool.query(
             `CREATE TABLE IF NOT EXISTS comments (
@@ -48,13 +53,10 @@ app.listen(port, async () => {
             );`
         );
 
-        memberSeeder();
-        adminSeeder();
-        articleSeeder();
         commentSeeder();
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
     console.log(`Server is running at http://localhost:${port}`);
 });
