@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { addContact, deleteContact } = require('./controllers/contact.controller');
+const { addNews } = require('./controllers/news.controller');
 const { addUser } = require('./controllers/user.controller');
 
 const router = Router();

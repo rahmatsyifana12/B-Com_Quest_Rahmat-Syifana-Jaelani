@@ -1,8 +1,9 @@
 const pool = require('../db');
-const { newContactSchema } = require('../validations/contact.validation');
+const jwt = require('jsonwebtoken');
+const { newNewsSchema } = require('../validations/contact.validation');
 
-async function addContact(req, res) {
-    const valResult = newContactSchema.validate(req.body);
+async function addNews(req, res) {
+    const valResult = newNewsSchema.validate(req.body);
 
     if (valResult.error) {
         return res.status(400).json({
@@ -11,24 +12,15 @@ async function addContact(req, res) {
         });
     }
 
-    const { name, email, phoneNumber } = req.body;
+    const { title, content } = req.body;
+
+    const token = req.headers['authorization'].split(' ')[1];
+    const userId = jwt.decode(token).userId;
 
     try {
-        const contact = await pool.query(
-            'SELECT * FROM contacts WHERE email = $1 OR phone_number = $2;',
-            [email, phoneNumber]
-        );
-
-        if (contact.rows.length) {
-            return res.status(400).json({
-                status: 'fail',
-                message: 'Contact with the same email or phone number is already exist'
-            });
-        }
-
         await pool.query(
-            'INSERT INTO contacts (name, email, phone_number) VALUES ($1, $2, $3);',
-            [name, email, phoneNumber]
+            'INSERT INTO news (user_id, title, content) VALUES ($1, $2, $3);',
+            [userId, title, content]
         );
 
         return res.status(201).json({
@@ -72,4 +64,4 @@ async function deleteContact(req, res) {
     }
 }
 
-module.exports = { addContact, deleteContact };
+module.exports = { addNews, deleteContact };
