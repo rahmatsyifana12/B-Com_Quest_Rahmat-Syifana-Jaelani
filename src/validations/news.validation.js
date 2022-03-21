@@ -12,4 +12,14 @@ const newNewsSchema = joi.object({
         .required()
 });
 
-module.exports = { newNewsSchema };
+const updateNewsSchema = joi.object({
+    title: joi.string()
+        .min(3)
+        .max(255),
+
+    content: joi.string()
+        .min(3)
+        .max(255)
+});
+
+module.exports = { newNewsSchema, updateNewsSchema };

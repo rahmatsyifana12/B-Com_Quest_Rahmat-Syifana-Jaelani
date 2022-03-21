@@ -53,6 +53,34 @@ async function updateNews(req, res) {
             message: 'Unexpected server error'
         });
     }
+
+    const valResult = updateNews.validate(req.body);
+
+    if (valResult.error) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'Object or value is invalid'
+        });
+    }
+
+    const { title, content } = req.body;
+
+    try {
+        await pool.query(
+            'UPDATE news SET title = $1, content = $2 WHERE id = $3;',
+            [title, content, newsId]
+        );
+
+        return res.status(200).json({
+            status: 'success',
+            message: 'Successfully updated news'
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Unexpected server error'
+        });
+    }
 }
 
 async function deleteNews(req, res) {
