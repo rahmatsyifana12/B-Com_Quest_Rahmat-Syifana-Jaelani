@@ -35,8 +35,29 @@ async function addNews(req, res) {
     }
 }
 
+async function updateNews(req, res) {
+    const newsId = req.params.newsId;
+
+    try {
+        const news = await pool.query('SELECT * FROM news WHERE id = $1;', [newsId]);
+
+        if (!news.rows.length) {
+            return res.status(404).json({
+                status: 'fail',
+                message: 'News not found'
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Unexpected server error'
+        });
+    }
+}
+
 async function deleteNews(req, res) {
     const newsId = req.params.newsId;
+
     try {
         const news = await pool.query('SELECT * FROM news WHERE id = $1;', [newsId]);
 
@@ -64,4 +85,4 @@ async function deleteNews(req, res) {
     }
 }
 
-module.exports = { addNews, deleteNews };
+module.exports = { addNews, deleteNews, updateNews };
