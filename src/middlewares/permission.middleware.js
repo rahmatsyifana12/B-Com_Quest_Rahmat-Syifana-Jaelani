@@ -7,12 +7,12 @@ function permission(req, res, next) {
 
     if (role === userRole.ADMIN) {
         next();
+    } else {
+        return res.status(401).json({
+            status: 'fail',
+            message: 'Unauthorized error'
+        });
     }
-
-    return res.status(401).json({
-        status: 'fail',
-        message: 'Unauthorized error'
-    });
 }
 
 module.exports = { permission };

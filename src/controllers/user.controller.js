@@ -74,7 +74,7 @@ async function loginUser(req, res) {
                 message: 'Account doesn\'t exist'
             });
         }
-    } catch (err) {
+    } catch (error) {
         return res.status(500).json({
             status: 'fail',
             message: 'Unexpected server error'
@@ -89,14 +89,14 @@ async function loginUser(req, res) {
             });
         }
 
-        const user = {
+        const payload = {
             userId: user.rows[0].id,
             email: user.rows[0].email,
-            role: user.role
+            role: user.rows[0].role
         };
 
         const accessToken = jwt.sign(
-            user,
+            payload,
             process.env.ACCESS_TOKEN_SECRET
         );
 
@@ -107,7 +107,8 @@ async function loginUser(req, res) {
                 accessToken
             }
         });
-    } catch (err) {
+    } catch (error) {
+        console.log(error);
         return res.status(500).json({
             status: 'fail',
             message: 'Unexpected server error'

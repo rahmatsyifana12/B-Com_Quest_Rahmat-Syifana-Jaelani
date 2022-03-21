@@ -46,8 +46,8 @@ app.listen(port, async () => {
             );`
         );
 
-        memberSeeder();
-        adminSeeder();
+        // memberSeeder();
+        // adminSeeder();
     } catch (error) {
         console.log(error);
     }

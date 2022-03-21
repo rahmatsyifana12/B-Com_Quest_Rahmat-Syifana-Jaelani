@@ -25,7 +25,7 @@ async function addNews(req, res) {
 
         return res.status(201).json({
             status: 'success',
-            message: 'Successfully created a new contact'
+            message: 'Successfully created a new news'
         });
     } catch (error) {
         return res.status(500).json({
