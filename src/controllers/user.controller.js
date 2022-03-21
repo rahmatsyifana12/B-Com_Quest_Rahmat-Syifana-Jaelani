@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const pool = require('../db');
 
 const { newUserSchema, userRole } = require('../validations/user.validation');
@@ -56,5 +57,6 @@ async function addUser(req, res) {
         });
     }
 }
+
 
 module.exports = { addUser };

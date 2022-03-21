@@ -1,6 +1,6 @@
 const pool = require('../db');
 const jwt = require('jsonwebtoken');
-const { newNewsSchema } = require('../validations/contact.validation');
+const { newNewsSchema } = require('../validations/news.validation');
 
 async function addNews(req, res) {
     const valResult = newNewsSchema.validate(req.body);
@@ -35,7 +35,7 @@ async function addNews(req, res) {
     }
 }
 
-async function deleteContact(req, res) {
+async function deleteNews(req, res) {
     const contactId = req.params.contactId;
     try {
         const contact = await pool.query('SELECT * FROM contacts WHERE id = $1;', [contactId]);
@@ -64,4 +64,4 @@ async function deleteContact(req, res) {
     }
 }
 
-module.exports = { addNews, deleteContact };
+module.exports = { addNews, deleteNews };
