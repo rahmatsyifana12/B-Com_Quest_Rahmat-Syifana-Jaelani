@@ -5,7 +5,7 @@ function authenticate(req, res, next) {
         const authHeader = req.headers['authorization'];
         const accessToken = authHeader.split(' ')[1];
         jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-        next();
+        return next();
     } catch (err) {
         return res.status(401).json({
             status: 'fail',

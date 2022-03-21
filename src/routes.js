@@ -9,10 +9,10 @@ const router = Router();
 router.post('/register', addUser);
 router.post('/login', loginUser);
 router.post('/news/add', authenticate, permission, addNews);
-router.post('/news/comment/:newsId', authenticate);
+router.post('/news/comments/:newsId', authenticate);
 
-router.put('/news/update/:newsId', authenticate, permission, updateNews);
+router.put('/news/:newsId', authenticate, permission, updateNews);
 
-router.delete('/news/delete/:newsId', authenticate, permission, deleteNews);
+router.delete('/news/:newsId', authenticate, permission, deleteNews);
 
 module.exports = router;

@@ -6,7 +6,7 @@ function permission(req, res, next) {
     const role = jwt.decode(token).role;
 
     if (role === userRole.ADMIN) {
-        next();
+        return next();
     } else {
         return res.status(401).json({
             status: 'fail',
