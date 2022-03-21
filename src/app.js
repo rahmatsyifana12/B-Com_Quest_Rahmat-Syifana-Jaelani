@@ -19,16 +19,29 @@ app.listen(port, async () => {
             `CREATE TABLE IF NOT EXISTS users (
                 id SERIAL NOT NULL PRIMARY KEY,
                 email VARCHAR(255) NOT NULL,
-                password VARCHAR(255) NOT NULL
+                password VARCHAR(255) NOT NULL,
+                role INT NOT NULL
             );`
         );
 
         await pool.query(
-            `CREATE TABLE IF NOT EXISTS contacts (
+            `CREATE TABLE IF NOT EXISTS news (
                 id SERIAL NOT NULL PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
-                email VARCHAR(255) NOT NULL,
-                phone_number VARCHAR(255) NOT NULL
+                user_id INT NOT NULL,
+                title VARCHAR(255) NOT NULL,
+                content VARCHAR(255) NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(id)
+            );`
+        );
+
+        await pool.query(
+            `CREATE TABLE IF NOT EXISTS comments (
+                id SERIAL NOT NULL PRIMARY KEY,
+                user_id INT NOT NULL,
+                news_id INT NOT NULL,
+                content VARCHAR(255) NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(id),
+                FOREIGN KEY (news_id) REFERENCES news(id)
             );`
         );
     } catch (error) {
