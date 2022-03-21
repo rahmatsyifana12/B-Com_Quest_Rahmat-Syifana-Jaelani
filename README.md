@@ -24,7 +24,7 @@ There are several modules required to run this program, but you can directly ins
 npm install
 ```
 
-After that, you need to install PostgrSQL. You can visit the following website to download the PostgrSQL installer based on your OS:
+After that, you need to install PostgreSQL. You can visit the following website to download the PostgreSQL installer based on your OS:
 https://www.postgresql.org/download/
 
 After the PostgreSQL installation complete, create a database with the name "cendrawasih" without quotes in your PostgreSQL database (I recommend to use pg Admin).
@@ -38,7 +38,12 @@ After that, open the project then open ```.env``` file. Change the following dat
 
 Or just change the following data if you set your PostgreSQL by default:
 * DB_DATABASE (don't change this if your database name for this project is "cendrawasih" without quotes)
-* DB_PASSWORD 
+* DB_PASSWORD
+
+Finally, run this program by executing the following command in the project's path:
+```
+npm run start
+```
 
 And now you can use this program, enjoy!
 
