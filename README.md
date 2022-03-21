@@ -6,7 +6,7 @@ This website is a company profile website owned by a company called "Cendrawasih
 
 ### Tech Stack
 
-* PostgrSQL
+* PostgreSQL
 * Express
 * NodeJS
 
