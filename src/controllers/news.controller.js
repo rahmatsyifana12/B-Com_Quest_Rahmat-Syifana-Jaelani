@@ -36,25 +36,25 @@ async function addNews(req, res) {
 }
 
 async function deleteNews(req, res) {
-    const contactId = req.params.contactId;
+    const newsId = req.params.newsId;
     try {
-        const contact = await pool.query('SELECT * FROM contacts WHERE id = $1;', [contactId]);
+        const news = await pool.query('SELECT * FROM news WHERE id = $1;', [newsId]);
 
-        if (!contact.rows.length) {
+        if (!news.rows.length) {
             return res.status(404).json({
                 status: 'fail',
-                message: 'Account not found'
+                message: 'News not found'
             });
         }
 
         await pool.query(
-            'DELETE FROM contacts WHERE id = $1;',
-            [contactId]
+            'DELETE FROM news WHERE id = $1;',
+            [newsId]
         );
 
         return res.status(200).json({
             status: 'success',
-            message: 'Successfully deleted contact'
+            message: 'Successfully deleted news'
         });
     } catch (error) {
         return res.status(500).json({
