@@ -26,11 +26,11 @@ async function addArticle(req, res) {
 }
 
 async function updateArticle(req, res) {
-    const articleId = req.params.newsId;
+    const articleId = req.params.articleId;
 
     try {
-        const article = await pool.query('SELECT * FROM news WHERE id = $1;', [articleId]);
-
+        const article = await pool.query('SELECT * FROM articles WHERE id = $1;', [articleId]);
+        console.log(article.rows);
         if (!article.rows.length) {
             return res.status(404).json({
                 status: 'fail',
@@ -65,7 +65,7 @@ async function updateArticle(req, res) {
 }
 
 async function deleteArticle(req, res) {
-    const articleId = req.params.newsId;
+    const articleId = req.params.articleId;
 
     try {
         const article = await pool.query('SELECT * FROM articles WHERE id = $1;', [articleId]);

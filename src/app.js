@@ -27,8 +27,8 @@ app.listen(port, async () => {
             );`
         );
 
-        memberSeeder();
-        adminSeeder();
+        // memberSeeder();
+        // adminSeeder();
 
         await pool.query(
             `CREATE TABLE IF NOT EXISTS articles (
@@ -40,7 +40,7 @@ app.listen(port, async () => {
             );`
         );
 
-        articleSeeder();
+        // articleSeeder();
 
         await pool.query(
             `CREATE TABLE IF NOT EXISTS comments (
@@ -53,7 +53,7 @@ app.listen(port, async () => {
             );`
         );
 
-        commentSeeder();
+        // commentSeeder();
 
     } catch (error) {
         console.error(error);
