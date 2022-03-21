@@ -29,16 +29,17 @@ https://www.postgresql.org/download/
 
 After the PostgreSQL installation complete, create a database with the name "cendrawasih" without quotes in your PostgreSQL database (I recommend to use pg Admin).
 
-After that, open the project then open ```.env``` file. Change the following data based on your PostgreSQL setting:
+After that, open the project then open ```.env``` file. Change the following data in ```.env``` file based on your PostgreSQL settings:
 * DB_USER
 * DB_HOST
 * DB_PORT
 * DB_DATABASE
 * DB_PASSWORD
 
-Or just change the following data if you set your PostgreSQL by default:
-* DB_DATABASE (don't change this if your database name for this project is "cendrawasih" without quotes)
-* DB_PASSWORD
+Or if you want to fill it with the PostgreSQL default settings, you can follow the following data:
+* DB_USER=postgres
+* DB_HOST=localhost
+* DB_PORT=5432
 
 Finally, run this program by executing the following command in the project's path:
 ```
