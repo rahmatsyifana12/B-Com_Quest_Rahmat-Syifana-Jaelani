@@ -94,4 +94,23 @@ async function deleteArticle(req, res) {
     }
 }
 
-module.exports = { addArticle, deleteArticle, updateArticle };
+async function getAllArticles(req, res) {
+    try {
+        const articles = await pool.query('SELECT * FROM articles;');
+
+        return res.status(200).json({
+            status: 'success',
+            message: 'Found all articles',
+            data: {
+                products: articles.rows
+            }
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Unexpected server error'
+        });
+    }
+}
+
+module.exports = { addArticle, deleteArticle, updateArticle, getAllArticles };
