@@ -24,6 +24,8 @@ There are several modules required to run this program, but you can directly ins
 npm install
 ```
 
+After that, delete ```.eslintrc.json``` file to remove linebreak-style error.
+
 After that, you need to install PostgreSQL. You can visit the following website to download the PostgreSQL installer based on your OS:
 https://www.postgresql.org/download/
 
@@ -76,6 +78,28 @@ There are several features that we can do depending on the role we have. There a
 * Update article
 * Delete article
 * Add comments to an article
+
+### API Endpoint
+
+#### GET
+```
+/articles
+/articles/{articleId}
+```
+#### POST
+```
+/register
+/login
+/articles/comments/{articleId}
+```
+#### PUT
+```
+/articles/{articleId}
+```
+#### DELETE
+```
+/articles/{articleId}
+```
 
 ### Entity Relationship Diagram
 This is the database design that's applied for this project.
