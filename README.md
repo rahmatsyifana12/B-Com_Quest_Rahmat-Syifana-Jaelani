@@ -59,6 +59,8 @@ There are several features that we can do depending on the role we have. There a
 * Admin
 
 #### Guest
+* Login
+* Register (to be a member)
 * View articles
 * View article comments
 
@@ -78,4 +80,5 @@ There are several features that we can do depending on the role we have. There a
 ### Entity Relationship Diagram
 This is the database design that's applied for this project.
 
-![erd_company_profile](https://user-images.githubusercontent.com/70148910/159276662-7adcfe38-d0d7-48bf-abf7-8202ce752047.jpg)
+![erd_cendrawasih](https://user-images.githubusercontent.com/70148910/159713392-3260f193-0244-432b-b286-fcb4d0439779.jpg)
+
